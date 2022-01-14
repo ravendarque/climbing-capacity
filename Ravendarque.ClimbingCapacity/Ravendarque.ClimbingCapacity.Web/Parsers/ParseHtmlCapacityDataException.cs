@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace Ravendarque.ClimbingCapacity.Web.Services;
+﻿namespace Ravendarque.ClimbingCapacity.Web.Parsers;
 
 public class ParseHtmlCapacityDataException : Exception
 {

@@ -1,4 +1,4 @@
-using Ravendarque.ClimbingCapacity.Web.Services;
+using Ravendarque.ClimbingCapacity.Web.Clients;
 
 var app = BuildWebApplication(args);
 

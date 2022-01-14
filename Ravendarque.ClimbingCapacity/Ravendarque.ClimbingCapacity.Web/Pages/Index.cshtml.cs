@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using NuGet.Packaging;
 
+using Ravendarque.ClimbingCapacity.Web.Clients;
 using Ravendarque.ClimbingCapacity.Web.Models;
-using Ravendarque.ClimbingCapacity.Web.Services;
 
 namespace Ravendarque.ClimbingCapacity.Web.Pages
 {

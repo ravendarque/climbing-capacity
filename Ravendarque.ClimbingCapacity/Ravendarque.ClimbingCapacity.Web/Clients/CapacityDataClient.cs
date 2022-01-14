@@ -1,6 +1,7 @@
 ﻿using Ravendarque.ClimbingCapacity.Web.Models;
+using Ravendarque.ClimbingCapacity.Web.Parsers;
 
-namespace Ravendarque.ClimbingCapacity.Web.Services;
+namespace Ravendarque.ClimbingCapacity.Web.Clients;
 
 public abstract class CapacityDataClient : ICapacityDataClient
 {

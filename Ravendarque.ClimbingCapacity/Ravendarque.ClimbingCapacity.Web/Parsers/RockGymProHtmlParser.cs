@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 
+using Ravendarque.ClimbingCapacity.Web.Clients;
 using Ravendarque.ClimbingCapacity.Web.Models;
 
-namespace Ravendarque.ClimbingCapacity.Web.Services
+namespace Ravendarque.ClimbingCapacity.Web.Parsers
 {
     public class RockGymProHtmlParser<T> : ICapacityDataParser<T>
         where T : ICapacity, new()

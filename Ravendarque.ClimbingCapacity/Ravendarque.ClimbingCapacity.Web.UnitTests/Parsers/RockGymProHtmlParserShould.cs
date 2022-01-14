@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using FluentAssertions;
 
 using NUnit.Framework;
 
 using Ravendarque.ClimbingCapacity.Web.Models;
-using Ravendarque.ClimbingCapacity.Web.Services;
+using Ravendarque.ClimbingCapacity.Web.Parsers;
 
-namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Services
+namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Parsers
 {
     internal class RockGymProHtmlParserShould
     {

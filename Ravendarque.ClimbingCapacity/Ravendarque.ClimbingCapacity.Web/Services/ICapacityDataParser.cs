@@ -2,7 +2,7 @@
 
 namespace Ravendarque.ClimbingCapacity.Web.Services;
 
-public interface ICapacityDataParser
+public interface ICapacityDataParser<out T> where T : ICapacity
 {
-    IEnumerable<Capacity> Parse(string content);
+    IEnumerable<T> Parse(string content);
 }

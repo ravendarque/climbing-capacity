@@ -4,6 +4,6 @@ namespace Ravendarque.ClimbingCapacity.Web.Services
 {
     public interface ICapacityDataClient
     {
-        Task<IEnumerable<Capacity>> Fetch();
+        Task<IEnumerable<ICapacity>> Fetch();
     }
 }

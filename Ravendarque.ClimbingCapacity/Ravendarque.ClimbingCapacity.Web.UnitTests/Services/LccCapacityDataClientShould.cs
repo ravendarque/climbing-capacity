@@ -1,4 +1,3 @@
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,15 +23,10 @@ namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Services
         [Test]
         public async Task ReturnCapacityData()
         {
-            const int dummyMaxValue = 100;
-            const int dummyCurrentValue = 10;
-            var expectedCapacity = new Capacity("DummyOrg", "DummyLocation", dummyMaxValue, dummyCurrentValue);
-
-            var fakeHttpResponseMessage = BuildFakeHttpResponseMessage();
-            var mockHttpMessageHandler = BuildMockHttpMessageHandler(fakeHttpResponseMessage);
+            var mockHttpMessageHandler = BuildMockHttpMessageHandler();
             var testHttpClient = new HttpClient(mockHttpMessageHandler.Object);
             var mockHttpClientFactory = BuildMockHttpClientFactory(testHttpClient);
-            var mockParser = BuildMockParser(expectedCapacity);
+            var mockParser = BuildMockParser();
 
             var testCapacityDataClient = new LccCapacityDataClient(mockHttpClientFactory.Object, mockParser.Object);
 
@@ -49,18 +43,9 @@ namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Services
             mockParser.Verify(m => m.Parse(It.IsAny<string>()));
         }
 
-        private static HttpResponseMessage BuildFakeHttpResponseMessage()
+        private static Mock<HttpMessageHandler> BuildMockHttpMessageHandler()
         {
-            var fakeHttpResponseMessage = new HttpResponseMessage()
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(GetTestData())
-            };
-            return fakeHttpResponseMessage;
-        }
-
-        private static Mock<HttpMessageHandler> BuildMockHttpMessageHandler(HttpResponseMessage responseMessage)
-        {
+            var dummyHttpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK);
             var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
             mockHttpMessageHandler.Protected()
                                   .Setup<Task<HttpResponseMessage>>(
@@ -68,7 +53,7 @@ namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Services
                                       ItExpr.IsAny<HttpRequestMessage>(),
                                       ItExpr.IsAny<CancellationToken>()
                                   )
-                                  .ReturnsAsync(responseMessage);
+                                  .ReturnsAsync(dummyHttpResponseMessage);
 
             return mockHttpMessageHandler;
         }
@@ -82,21 +67,14 @@ namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Services
             return mockHttpClientFactory;
         }
 
-        private static Mock<ICapacityDataParser> BuildMockParser(Capacity expectedCapacity)
+        private static Mock<ICapacityDataParser<ICapacity>> BuildMockParser()
         {
-            var mockParser = new Mock<ICapacityDataParser>();
+            var dummyCapacity = Enumerable.Empty<LccCapacity>();
+            var mockParser = new Mock<ICapacityDataParser<ICapacity>>();
             mockParser.Setup(x => x.Parse(It.IsAny<string>()))
-                      .Returns(Enumerable.Repeat(expectedCapacity, 1));
+                      .Returns(dummyCapacity);
 
             return mockParser;
-        }
-
-        private static string GetTestData()
-        {
-            var testRunPath = TestContext.CurrentContext.TestDirectory;
-            var testDataFile = Path.Combine(testRunPath, "../../../TestData", "FakeHttpResponseMessageContent.html");
-
-            return File.ReadAllText(testDataFile);
         }
     }
 }

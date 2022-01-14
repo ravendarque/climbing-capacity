@@ -1,4 +1,6 @@
-﻿namespace Ravendarque.ClimbingCapacity.Web.Services;
+﻿using Ravendarque.ClimbingCapacity.Web.Models;
+
+namespace Ravendarque.ClimbingCapacity.Web.Services;
 
 public class LccCapacityDataClient : CapacityDataClient
 {
@@ -8,10 +10,10 @@ public class LccCapacityDataClient : CapacityDataClient
     public LccCapacityDataClient(IHttpClientFactory httpClientFactory) : base(
         httpClientFactory,
         new Uri(CapacityUri),
-        new RockGymProHtmlParser()
+        new RockGymProHtmlParser<LccCapacity>()
     ) { }
 
-    public LccCapacityDataClient(IHttpClientFactory httpClientFactory, ICapacityDataParser parser) : base(
+    public LccCapacityDataClient(IHttpClientFactory httpClientFactory, ICapacityDataParser<ICapacity> parser) : base(
         httpClientFactory,
         new Uri(CapacityUri),
         parser

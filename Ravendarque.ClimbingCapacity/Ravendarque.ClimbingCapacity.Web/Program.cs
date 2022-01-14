@@ -1,9 +1,6 @@
-var builder = WebApplication.CreateBuilder(args);
+using Ravendarque.ClimbingCapacity.Web.Services;
 
-builder.Services.AddRazorPages();
-builder.Services.AddHttpClient();
-
-var app = builder.Build();
+var app = BuildWebApplication(args);
 
 if (!app.Environment.IsDevelopment())
 {
@@ -19,3 +16,13 @@ app.UseHttpsRedirection()
 app.MapRazorPages();
 
 app.Run();
+
+static WebApplication BuildWebApplication(string[] strings)
+{
+    var builder = WebApplication.CreateBuilder(strings);
+    builder.Services.AddRazorPages();
+    builder.Services.AddHttpClient();
+    builder.Services.AddSingleton<ICapacityDataClient, LccCapacityDataClient>();
+           //.AddSingleton<ICapacityDataClient, Other>();
+    return builder.Build();
+}

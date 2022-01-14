@@ -7,26 +7,31 @@ using Ravendarque.ClimbingCapacity.Web.Models;
 
 namespace Ravendarque.ClimbingCapacity.Web.Services
 {
-    public class RockGymProHtmlParser : ICapacityDataParser
+    public class RockGymProHtmlParser<T> : ICapacityDataParser<T>
+        where T : ICapacity, new()
     {
+        private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+            { AllowTrailingCommas = true };
+
         private const string NotAvailable = "-1";
 
-        public IEnumerable<Capacity> Parse(string content)
+        public IEnumerable<T> Parse(string content)
         {
-            var capacityData = ParseCapacityData(content);
-
-            foreach (var (key, value) in capacityData.AsObject())
-            {
-                yield return new Capacity(
-                    "DummyOrg", 
-                    key, 
-                    int.Parse(value?["capacity"]?.ToString() ?? NotAvailable), 
-                    int.Parse(value?["count"]?.ToString() ?? NotAvailable)
-                    );
-            }
+            return ParseCapacityData(content).Select(BuildCapacity);
         }
 
-        private static JsonNode ParseCapacityData(string content)
+        private static T BuildCapacity(KeyValuePair<string, JsonNode?> capacity)
+        {
+            var (location, data) = capacity;
+            return new T
+            {
+                Location = location,
+                Max = int.Parse(data?["capacity"]?.ToString() ?? NotAvailable),
+                Current = int.Parse(data?["count"]?.ToString() ?? NotAvailable)
+            };
+        }
+
+        private static JsonObject ParseCapacityData(string content)
         {
             var rawCapacityDataMatch = Regex.Match(content, "var data = ({.+?});", RegexOptions.Singleline);
             if (!rawCapacityDataMatch.Success || rawCapacityDataMatch.Groups.Count != 2)
@@ -36,10 +41,10 @@ namespace Ravendarque.ClimbingCapacity.Web.Services
 
             var rawCapacityData = rawCapacityDataMatch.Groups[1].Value.Replace('\'', '"');
 
-            JsonNode? capacityData;
+            JsonObject? capacityData;
             try
             {
-                capacityData = JsonNode.Parse(rawCapacityData);
+                capacityData = JsonSerializer.Deserialize<JsonObject>(rawCapacityData, JsonSerializerOptions);
             }
             catch (JsonException ex)
             {

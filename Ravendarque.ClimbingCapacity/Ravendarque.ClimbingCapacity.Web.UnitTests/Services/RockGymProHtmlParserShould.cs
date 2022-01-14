@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,24 +20,32 @@ namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Services
         [Test]
         public void ParseCapacityDataFromHtml()
         {
-            const int dummyMaxValue = 100;
-            const int dummyCurrentValue = 10;
+            var expectedCapacity = new Collection<ICapacity>
+            {
+                new LccCapacity { Location = "VWS", Max = 130, Current = 13},
+                new LccCapacity { Location = "VES", Max = 120, Current = 4},
+                new LccCapacity { Location = "HAR", Max = 300, Current = 0},
+                new LccCapacity { Location = "CRO", Max = 120, Current = 10},
+                new LccCapacity { Location = "RAV", Max = 130, Current = 5},
+                new LccCapacity { Location = "CNW", Max = 80,  Current = 0},
+                new LccCapacity { Location = "BWG", Max = 130, Current = 4}
+            };
 
-            var expectedCapacity = new Capacity("DummyOrg", "DummyLocation", dummyMaxValue, dummyCurrentValue);
-
-            var testParser = new RockGymProHtmlParser();
+            var testParser = new RockGymProHtmlParser<LccCapacity>();
             var testContent = GetTestData();
 
             var actualCapacityData = testParser.Parse(testContent);
             actualCapacityData.Should()
-                              .HaveCount(1)
-                              .And.ContainEquivalentOf(expectedCapacity);
+                              .BeEquivalentTo(expectedCapacity);
         }
 
         private static string GetTestData()
         {
+            const string testDataRelativePath = "../../../TestData";
+            const string testDataFileName = "LccTestHttpResponseMessageContent.html";
+
             var testRunPath = TestContext.CurrentContext.TestDirectory;
-            var testDataFile = Path.Combine(testRunPath, "../../../TestData", "FakeHttpResponseMessageContent.html");
+            var testDataFile = Path.Combine(testRunPath, testDataRelativePath, testDataFileName);
 
             return File.ReadAllText(testDataFile);
         }

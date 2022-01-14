@@ -47,7 +47,7 @@ namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Clients
             var dummyCapacity = Enumerable.Empty<T>();
             var mockParser = new Mock<ICapacityDataParser<T>>();
             mockParser.Setup(x => x.Parse(It.IsAny<string>()))
-                      .Returns((IEnumerable<T>)dummyCapacity);
+                      .Returns(dummyCapacity);
 
             return mockParser;
         }

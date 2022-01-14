@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ravendarque.ClimbingCapacit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ravendarque.ClimbingCapacity.Web.UnitTests", "Ravendarque.ClimbingCapacity.Web.UnitTests\Ravendarque.ClimbingCapacity.Web.UnitTests.csproj", "{3F004969-E7C5-43C6-824E-284B4BEE1973}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{297D6100-45E7-4AEB-A5D6-4D15CD25203E}"
+	ProjectSection(SolutionItems) = preProject
+		..\climbing-counters.ps1 = ..\climbing-counters.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

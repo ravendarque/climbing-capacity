@@ -22,7 +22,10 @@ static WebApplication BuildWebApplication(string[] strings)
     var builder = WebApplication.CreateBuilder(strings);
     builder.Services.AddRazorPages();
     builder.Services.AddHttpClient();
-    builder.Services.AddSingleton<ICapacityDataClient, LccCapacityDataClient>();
-           //.AddSingleton<ICapacityDataClient, Other>();
+    builder.Services.AddSingleton<ICapacityDataClient, LccCapacityDataClient>()
+                    .AddSingleton<ICapacityDataClient, YonderCapacityDataClient>()
+                    .AddSingleton<ICapacityDataClient, TheReachCapacityDataClient>()
+                    .AddSingleton<ICapacityDataClient, ClimbingHangarCapacityDataClient>();
+
     return builder.Build();
 }

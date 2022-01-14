@@ -10,10 +10,12 @@ using Ravendarque.ClimbingCapacity.Web.Parsers;
 
 namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Parsers
 {
-    internal class RockGymProHtmlParserShould
+    internal class RockGymProHtmlParserForLccShould : RockGymProHtmlParserTestBase
     {
+        protected override string TestDataFileName => "LccTestHttpResponseMessageContent.html";
+
         [Test]
-        public void ParseCapacityDataFromHtml()
+        public override void ParseCapacityDataFromHtml()
         {
             var expectedCapacity = new Collection<ICapacity>
             {
@@ -27,22 +29,11 @@ namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Parsers
             };
 
             var testParser = new RockGymProHtmlParser<LccCapacity>();
-            var testContent = GetTestData();
+            var testContent = GetTestData(TestDataFileName);
 
             var actualCapacityData = testParser.Parse(testContent);
             actualCapacityData.Should()
                               .BeEquivalentTo(expectedCapacity);
-        }
-
-        private static string GetTestData()
-        {
-            const string testDataRelativePath = "../../../TestData";
-            const string testDataFileName = "LccTestHttpResponseMessageContent.html";
-
-            var testRunPath = TestContext.CurrentContext.TestDirectory;
-            var testDataFile = Path.Combine(testRunPath, testDataRelativePath, testDataFileName);
-
-            return File.ReadAllText(testDataFile);
         }
     }
 }

@@ -20,9 +20,4 @@
     <ProjectReference Include="..\Ravendarque.ClimbingCapacity.Web\Ravendarque.ClimbingCapacity.Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Clients\" />
-    <Folder Include="Parsers\" />
-  </ItemGroup>
-
 </Project>

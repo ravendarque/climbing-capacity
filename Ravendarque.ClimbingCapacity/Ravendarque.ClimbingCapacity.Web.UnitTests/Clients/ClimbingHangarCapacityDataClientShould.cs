@@ -11,31 +11,30 @@ using Ravendarque.ClimbingCapacity.Web.Clients;
 using Ravendarque.ClimbingCapacity.Web.Models;
 using Ravendarque.ClimbingCapacity.Web.Parsers;
 
-namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Clients
+namespace Ravendarque.ClimbingCapacity.Web.UnitTests.Clients;
+
+public class ClimbingHangarCapacityDataClientShould : CapacityDataClientTestBase
 {
-    public class ClimbingHangarCapacityDataClientShould : CapacityDataClientTestBase
+    [Test]
+    public async Task ReturnCapacityData()
     {
-        [Test]
-        public async Task ReturnCapacityData()
-        {
-            var mockHttpMessageHandler = BuildMockHttpMessageHandler();
-            var testHttpClient = new HttpClient(mockHttpMessageHandler.Object);
-            var mockHttpClientFactory = BuildMockHttpClientFactory(testHttpClient);
-            var mockParser = BuildMockParser<ClimbingHangarCapacity>();
+        var mockHttpMessageHandler = BuildMockHttpMessageHandler();
+        var testHttpClient = new HttpClient(mockHttpMessageHandler.Object);
+        var mockHttpClientFactory = BuildMockHttpClientFactory(testHttpClient);
+        var mockParser = BuildMockParser<ClimbingHangarCapacity>();
 
-            var testCapacityDataClient = new ClimbingHangarCapacityDataClient(mockHttpClientFactory.Object, mockParser.Object);
+        var testCapacityDataClient = new ClimbingHangarCapacityDataClient(mockHttpClientFactory.Object, mockParser.Object);
 
-            await testCapacityDataClient.Fetch();
+        await testCapacityDataClient.Fetch();
 
-            mockHttpClientFactory.Verify(m => m.CreateClient(It.IsAny<string>()), Times.Once);
-            mockHttpMessageHandler.Protected()
-                                  .Verify(
-                                      SendAsyncMethodName,
-                                      Times.Once(),
-                                      ItExpr.IsAny<HttpRequestMessage>(),
-                                      ItExpr.IsAny<CancellationToken>()
-                                  );
-            mockParser.Verify(m => m.Parse(It.IsAny<string>()));
-        }
+        mockHttpClientFactory.Verify(m => m.CreateClient(It.IsAny<string>()), Times.Once);
+        mockHttpMessageHandler.Protected()
+                              .Verify(
+                                  SendAsyncMethodName,
+                                  Times.Once(),
+                                  ItExpr.IsAny<HttpRequestMessage>(),
+                                  ItExpr.IsAny<CancellationToken>()
+                              );
+        mockParser.Verify(m => m.Parse(It.IsAny<string>()));
     }
 }

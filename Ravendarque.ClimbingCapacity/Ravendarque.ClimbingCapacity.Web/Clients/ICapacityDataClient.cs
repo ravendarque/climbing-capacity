@@ -1,9 +1,8 @@
 ﻿using Ravendarque.ClimbingCapacity.Web.Models;
 
-namespace Ravendarque.ClimbingCapacity.Web.Clients
+namespace Ravendarque.ClimbingCapacity.Web.Clients;
+
+public interface ICapacityDataClient
 {
-    public interface ICapacityDataClient
-    {
-        Task<IEnumerable<ICapacity>> Fetch();
-    }
+    Task<IEnumerable<ICapacity>> Fetch();
 }

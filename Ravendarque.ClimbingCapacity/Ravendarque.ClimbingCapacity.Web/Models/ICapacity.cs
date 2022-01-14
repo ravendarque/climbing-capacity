@@ -4,10 +4,12 @@
     {
         string? Org { get; }
 
-        string? Location { get; set; }
+        string Location { get; init; }
 
-        int Max { get; set; }
+        int Max { get; init; }
 
-        int Current { get; set; }
+        int Current { get; init; }
+
+        string LocationName { get; }
     }
 }

@@ -2,11 +2,37 @@
 
 public class LccCapacity : ICapacity
 {
+    private static readonly Dictionary<string, string> LocationMap = new()
+    {
+        { "VWS", "VauxWall West" },
+        { "VES", "VauxWall East" },
+        { "HAR", "HarroWall" },
+        { "CRO", "CroyWall" },
+        { "RAV", "RavensWall" },
+        { "CNW", "CanaryWall" },
+        { "BWG", "BethWall Green" }
+    };
+
     public string Org => "LCC";
 
-    public string? Location { get; set; }
+    private readonly string _location = "Unknown";
 
-    public int Max { get; set; }
+    public string Location
+    {
+        get => _location;
+        init
+        {
+            if (!string.IsNullOrEmpty(value))
+                _location = value;
+        }
+    }
 
-    public int Current { get; set; }
+    public string LocationName =>
+        LocationMap.TryGetValue(Location, out var locationName)
+            ? locationName
+            : Location;
+
+    public int Max { get; init; }
+
+    public int Current { get; init; }
 }

@@ -2,7 +2,6 @@
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 
-using Ravendarque.ClimbingCapacity.Web.Clients;
 using Ravendarque.ClimbingCapacity.Web.Models;
 
 namespace Ravendarque.ClimbingCapacity.Web.Parsers
@@ -10,8 +9,13 @@ namespace Ravendarque.ClimbingCapacity.Web.Parsers
     public class RockGymProHtmlParser<T> : ICapacityDataParser<T>
         where T : ICapacity, new()
     {
-        private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new()
             { AllowTrailingCommas = true };
+
+        private readonly Regex _rawCapacityDataRegex = new(
+            "var data = ({.+?});",
+            RegexOptions.Singleline | RegexOptions.Compiled
+        );
 
         private const string NotAvailable = "-1";
 
@@ -31,9 +35,9 @@ namespace Ravendarque.ClimbingCapacity.Web.Parsers
             };
         }
 
-        private static JsonObject ParseCapacityData(string content)
+        private JsonObject ParseCapacityData(string content)
         {
-            var rawCapacityDataMatch = Regex.Match(content, "var data = ({.+?});", RegexOptions.Singleline);
+            var rawCapacityDataMatch = _rawCapacityDataRegex.Match(content);
             if (!rawCapacityDataMatch.Success || rawCapacityDataMatch.Groups.Count != 2)
             {
                 throw new ParseHtmlCapacityDataException("Could not find match for capacity data in html content");
@@ -44,7 +48,7 @@ namespace Ravendarque.ClimbingCapacity.Web.Parsers
             JsonObject? capacityData;
             try
             {
-                capacityData = JsonSerializer.Deserialize<JsonObject>(rawCapacityData, JsonSerializerOptions);
+                capacityData = JsonSerializer.Deserialize<JsonObject>(rawCapacityData, _jsonSerializerOptions);
             }
             catch (JsonException ex)
             {

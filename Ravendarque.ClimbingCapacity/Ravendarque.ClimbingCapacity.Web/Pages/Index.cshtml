@@ -1,0 +1,48 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Current Capacity</h1>
+
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CapacityData.First().Org)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CapacityData.First().Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CapacityData.First().Max)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CapacityData.First().Current)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.CapacityData)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Org)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Current)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

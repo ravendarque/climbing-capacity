@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ravendarque.ClimbingCapacity.Web", "Ravendarque.ClimbingCapacity.Web\Ravendarque.ClimbingCapacity.Web.csproj", "{BE9C12EA-1637-446D-816B-5374C058382D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ravendarque.ClimbingCapacity.Web.UnitTests", "Ravendarque.ClimbingCapacity.Web.UnitTests\Ravendarque.ClimbingCapacity.Web.UnitTests.csproj", "{3F004969-E7C5-43C6-824E-284B4BEE1973}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{297D6100-45E7-4AEB-A5D6-4D15CD25203E}"
+	ProjectSection(SolutionItems) = preProject
+		..\climbing-counters.ps1 = ..\climbing-counters.ps1
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE9C12EA-1637-446D-816B-5374C058382D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9C12EA-1637-446D-816B-5374C058382D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9C12EA-1637-446D-816B-5374C058382D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9C12EA-1637-446D-816B-5374C058382D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F004969-E7C5-43C6-824E-284B4BEE1973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F004969-E7C5-43C6-824E-284B4BEE1973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F004969-E7C5-43C6-824E-284B4BEE1973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F004969-E7C5-43C6-824E-284B4BEE1973}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DEAD25ED-8B89-461B-9C52-8BA50BEFA390}
+	EndGlobalSection
+EndGlobal

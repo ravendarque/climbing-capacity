@@ -7,9 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Ravendarque.ClimbingCapacity.Web.csproj", "Ravendarque.ClimbingCapacity.Web/"]
+COPY ["Ravendarque.ClimbingCapacity.Web/Ravendarque.ClimbingCapacity.Web.csproj", "Ravendarque.ClimbingCapacity.Web/"]
 RUN dotnet restore "Ravendarque.ClimbingCapacity.Web/Ravendarque.ClimbingCapacity.Web.csproj"
-COPY . Ravendarque.ClimbingCapacity.Web/
+COPY . .
 WORKDIR "/src/Ravendarque.ClimbingCapacity.Web"
 RUN dotnet build "Ravendarque.ClimbingCapacity.Web.csproj" -c Release -o /app/build
 

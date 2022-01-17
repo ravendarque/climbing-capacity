@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{297D6100-45E7-4AEB-A5D6-4D15CD25203E}"
 	ProjectSection(SolutionItems) = preProject
 		..\climbing-counters.ps1 = ..\climbing-counters.ps1
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Global

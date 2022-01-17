@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{297D
 	ProjectSection(SolutionItems) = preProject
 		..\climbing-counters.ps1 = ..\climbing-counters.ps1
 		Dockerfile = Dockerfile
+		GitVersion.yml = GitVersion.yml
 	EndProjectSection
 EndProject
 Global

@@ -1,0 +1,7 @@
+mode: Mainline
+branches:
+  feature:
+    regex: ^feature?[/-]
+    tag: ci
+  pull-request:
+    tag: pr

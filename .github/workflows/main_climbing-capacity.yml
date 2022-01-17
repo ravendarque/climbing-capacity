@@ -31,8 +31,7 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_6e9f1feb6a5f485bba5f5dc924aeeed2 }}/https:${{ github.sha }}
-        file: ./Dockerfile
-        context: ./Ravendarque.ClimbingCapacity.Web/
+        file: ./Ravendarque.ClimbingCapacity
 
   deploy:
     runs-on: ubuntu-latest

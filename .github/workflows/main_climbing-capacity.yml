@@ -17,8 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      #with:
+      #  fetch-depth: 0
 
     - name: Setup GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.7
@@ -45,7 +45,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_6e9f1feb6a5f485bba5f5dc924aeeed2 }}/climbing-capacity:${{ steps.gitversion.outputs.SemVer }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_6e9f1feb6a5f485bba5f5dc924aeeed2 }}/climbing-capacity:${{ steps.gitversion.outputs.semVer }}
         file: ./Ravendarque.ClimbingCapacity/Dockerfile
         context: ./Ravendarque.ClimbingCapacity
 

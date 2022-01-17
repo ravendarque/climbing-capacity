@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - './RavenDarque.ClimbingCapacity/**'
   workflow_dispatch:
 
 jobs:
@@ -15,17 +17,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
-    - name: Fetch tags for GitVersion
-      run: git fetch --tags
+    - name: Setup GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.7
+      with:
+        versionSpec: '5.x'
 
-    - name: Fetch main for GitVersion
-      if: github.ref != 'refs/heads/main'
-      run: git branch --create-reflog master origin/main
+    - name: Execute GitVersion
+      uses: gittools/actions/gitversion/execute@v0.9.7
+      with:
+        useConfigFile: true
+        configFilePath: GitVersion.yml
       
-    - name: Run GitVersion
-      uses: roryprimrose/rungitversion@v1.0.0
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 

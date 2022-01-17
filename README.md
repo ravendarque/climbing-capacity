@@ -14,5 +14,7 @@ Rock Gym Pro provides an HTML page with the capacity data for a given organisati
 ## Tech stack
 
 Code: .NET 6, ASP.NET, Razor
+
 Test: NUnit, Fluent Assertions, Moq
+
 Hosting: Azure Web App, Docker, Linux

@@ -3,6 +3,7 @@
 An application which fetches capacity data for London climbing walls. Currently only climbing walls which use the Rock Gym Pro management software make their capacity data visible on their websites and therefore available to this application. 
 
 Note 1: It's fully functioning, production quality code but let's call it a very early beta.
+
 Note 2: I have a very wonky attention span, so either this readme will be the last thing I ever do in this repo, or it will become my entire life and I'll over-engineer it to the point where it attains sentience and embarks on a campaign for world domination.
 
 ## How it works

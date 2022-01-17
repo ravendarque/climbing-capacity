@@ -65,4 +65,4 @@ jobs:
         app-name: 'climbing-capacity'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_287cc4604f9b4993a667c3a181bb13f3 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_6e9f1feb6a5f485bba5f5dc924aeeed2 }}/climbing-capacity:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_6e9f1feb6a5f485bba5f5dc924aeeed2 }}/climbing-capacity:${{ steps.gitversion.outputs.semVer }}'
